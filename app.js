@@ -50,3 +50,39 @@ $('copy-email').onclick=async()=>{try{await navigator.clipboard.writeText('digit
 $('year').textContent=new Date().getFullYear();
 document.querySelectorAll('video').forEach(video=>video.addEventListener('play',()=>document.querySelectorAll('video').forEach(other=>{if(other!==video)other.pause();})));
 if('IntersectionObserver' in window){const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target);}}),{threshold:.08});document.querySelectorAll('.section-heading,.services-intro,.about-copy,.teaching-list article,.process-grid article').forEach(el=>{el.classList.add('reveal');observer.observe(el);});}
+
+
+// Accessible testimonial carousel: native touch scrolling with keyboard-friendly controls.
+const reviewsTrack = $('reviews-track');
+if (reviewsTrack) {
+ const cards = Array.from(reviewsTrack.querySelectorAll('.review-card'));
+ const previous = $('reviews-prev');
+ const next = $('reviews-next');
+ const current = $('reviews-current');
+ const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+ let scheduled = false;
+ function updateReviewControls() {
+  const max = Math.max(0, reviewsTrack.scrollWidth - reviewsTrack.clientWidth);
+  previous.disabled = reviewsTrack.scrollLeft <= 3;
+  next.disabled = reviewsTrack.scrollLeft >= max - 3;
+  if (cards.length) {
+   const step = cards.length > 1 ? cards[1].offsetLeft - cards[0].offsetLeft : cards[0].getBoundingClientRect().width;
+   const firstVisible = Math.min(cards.length - 1, Math.max(0, Math.round(reviewsTrack.scrollLeft / Math.max(1, step))));
+   current.textContent = String(firstVisible + 1).padStart(2, '0');
+  }
+ }
+ function moveReview(direction) {
+  if (!cards.length) return;
+  const distance = cards.length > 1 ? cards[1].offsetLeft - cards[0].offsetLeft : cards[0].getBoundingClientRect().width;
+  reviewsTrack.scrollBy({ left: distance * direction, behavior: reducedMotion.matches ? 'auto' : 'smooth' });
+ }
+ previous.addEventListener('click', () => moveReview(-1));
+ next.addEventListener('click', () => moveReview(1));
+ reviewsTrack.addEventListener('scroll', () => {
+  if (scheduled) return;
+  scheduled = true;
+  requestAnimationFrame(() => { scheduled = false; updateReviewControls(); });
+ }, { passive: true });
+ window.addEventListener('resize', updateReviewControls);
+ updateReviewControls();
+}
