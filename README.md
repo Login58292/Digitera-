@@ -33,3 +33,27 @@ Project descriptions distinguish independent visual studies from commissioned wo
 - **Evidence and claims:** Publish client-approved screenshots and actual campaign assets only with permission. Keep website previews, independent research, proposed concepts, and completed commissions clearly distinguished. Add traffic, rankings, sales or review claims only after verifying original data and client permission.
 - **Feedback:** Review the existing testimonial text and permission to display names before presenting testimonials as verified client endorsements.
 - **Release:** Merge the pull request to publish through an existing main-branch GitHub Pages configuration. Until then the live branch remains unchanged.
+
+## Extended case-study and creative proof pages
+
+- `case-studies.html` + `case-studies.css`: a full, accessible case-study experience linked from the homepage. Describes the design scope for Qasr Decor, marketing research for Apex Limo SF and the completed coloring-book video ad.
+- Existing `assets/smartfix.webp`, `assets/smart-ac.webp`, `assets/clean-air.webp` and `assets/clean-dryer.webp` appear in image-led proof galleries on both the homepage and the detail page. Viewers can open the original assets directly.
+- The Qasr browser illustration is explicitly **not a screenshot**. To show the real completed website on-page, replace that mock with a permission-cleared screenshot once available.
+- Apex Limo SF is classified as marketing **research**, not a DigiTera-built website or published ad campaign.
+- Previously displayed testimonial quotes have been taken **off the public-facing draft** because their sources and publication permissions were not provided. The page now emphasizes visible examples of work. If reviews are later supplied and verified, they can be restored with permission.
+- The fixed WhatsApp CTA says only **Chat with us** and opens a message draft to the existing number, not an automated chat or fake availability indicator.
+
+### Content needed for richer, measurable case studies
+
+For each project, request (with permission):
+1. A genuine screenshot of the project or campaign visual.
+2. A brief written scope: the initial business problem, who handled which deliverables, and the timeframe.
+3. At least one completed deliverable (final video, site, post design, report excerpt, or screenshot of changes).
+4. **Only if the client wants measurable outcomes shown:** a source-supported before/after comparison with dates, units and clear attribution.
+5. Written permission for naming the client, reproducing artwork, displaying project metrics and publishing any testimonials.
+
+Do not turn strategies or recommendations into claimed customer outcomes. If approval or metrics are unavailable, accurately label projects as research, creative studies or visual concepts.
+
+### Review and publish
+
+The PR branch holds the complete update and stays separate from the live site. Inspect `index.html` and `case-studies.html` across phone and desktop sizes. Review external project destinations and WhatsApp text before merging. Changes merge into `main` only with the site owner's approval.
