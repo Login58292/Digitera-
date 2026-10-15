@@ -15,7 +15,7 @@ function render(filter = 'all') {
    artwork=`<div class="case-art case-art--${a.theme}" aria-label="${p.title} editorial project title card"><span class="case-art-eyebrow">${a.kicker}</span><span class="case-art-orbit" aria-hidden="true">✳</span><strong>${a.title}</strong><small>${a.foot}</small><span class="case-art-serial">DIGITERA / SELECTED WORK</span></div>`;
   } else {
    const extension=p.coverExt || 'webp';
-   artwork=`<img src="assets/${p.cover}.${extension}" alt="${p.title} project artwork" loading="lazy" width="1000" height="800">`;
+   artwork=`<img src="${p.coverUrl || `assets/${p.cover}.${extension}`}" alt="${p.title} project artwork" loading="lazy" width="1000" height="800">`;
   }
   const isVideo=p.id==='ugc-coloring';
   button.innerHTML=`<div class="project-image${isVideo?' is-video-cover':''}">${artwork}<span class="project-chip">${p.label||p.categories[0]}</span>${isVideo?'<span class="project-play" aria-hidden="true">▶ &nbsp; WATCH VIDEO</span>':''}<span class="project-open" aria-hidden="true">↗</span></div><div class="project-meta"><div><h3>${p.title}</h3><p>${p.subtitle}</p></div><span class="project-number">${String(projects.indexOf(p)+1).padStart(2,'0')}</span></div>`;
