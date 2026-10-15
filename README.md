@@ -71,7 +71,7 @@ The PR branch holds the complete update and stays separate from the live site. I
 - Added decision FAQs, client-friendly deliverable definitions and explicit research-versus-creative proof labels.
 - Changed unverified numerical experience and learner claims in the personal bio to skills-based statements pending confirmation. Existing portfolio work and project assets remain intact.
 - Added project-specific **editable** enquiry draft links from Qasr, Apex and video examples; `app.js` only prepares text locally, and visitors must choose to send.
-- Website logos now load from the repository's existing local branded asset. Original video and gallery content is preserved.
+- Website header, animated hero, and footer logos use the exact original logo source from the live `main` branch to preserve its transparent presentation. The `assets/digitera-logo.webp` file remains only for existing uses such as the favicon; it was unsuitable as a replacement for the visible brand mark. Original video and gallery content is preserved.
 - Source checks run via `node scripts/check-portfolio.mjs`, with a GitHub Actions PR workflow at `.github/workflows/portfolio-pr-check.yml`. Check whether GitHub actually reports a green run before calling CI passed.
 - Avoid publishing a canonical URL or XML sitemap with an invented production domain; configure those after confirming the real domain and its deployment path.
 - Real browser/device testing, client approval, external hosting checks and permission to display identifiable work remain necessary before merging the feature PR to `main`.
