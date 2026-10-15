@@ -52,3 +52,23 @@ html { scroll-padding-top: 28px; }
 @media (max-width: 850px) { .proof-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .proof-card--ugc { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1.4fr; } .proof-card--ugc .proof-cover { min-height: 100%; } .proof-card--ugc .proof-content { padding: 24px; } }
 @media (max-width: 650px) { .proof-section { padding-block: 65px; } .proof-grid { grid-template-columns: 1fr; gap: 18px; } .proof-card--ugc { grid-column: auto; display: flex; } .proof-cover, .proof-card--ugc .proof-cover { min-height: 195px; } .proof-content, .proof-card--ugc .proof-content { padding: 24px 21px; } .proof-card h3 { font-size: 22px; } .proof-bottom { flex-direction: column; align-items: flex-start; } .proof-contact { white-space: normal; } .digitera-whatsapp { right: max(13px, env(safe-area-inset-right)); bottom: max(15px, env(safe-area-inset-bottom)); padding: 11px 15px 11px 11px; gap: 8px; font-size: 12px; } .digitera-whatsapp__icon { width: 25px; height: 25px; } }
 @media (prefers-reduced-motion: reduce) { .proof-card, .proof-button, .digitera-whatsapp { animation: none !important; transition: none !important; } .proof-card:hover, .proof-button:hover, .digitera-whatsapp:hover { transform: none !important; } }
+
+/* Showcase tangible portfolio artwork rather than testimonials awaiting verification. */
+.campaign-proof .section-heading h2{color:#103762}
+.campaign-proof .section-heading>p{color:#526f8f}
+.campaign-proof-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.campaign-proof-item{display:flex;flex-direction:column;min-width:0;overflow:hidden;background:#fff;border:1px solid #dce8f6;border-radius:21px;color:#123d6c;box-shadow:0 13px 38px rgba(10,42,89,.08);transition:transform .22s ease,box-shadow .22s ease}
+.campaign-proof-item:hover{transform:translateY(-4px);box-shadow:0 20px 45px rgba(10,42,89,.15)}
+.campaign-proof-item:focus-visible{outline:3px solid #e6a337;outline-offset:4px}
+.campaign-proof-item img{display:block;width:100%;height:auto;aspect-ratio:4/4.15;object-fit:cover;background:#e9f2fa}
+.campaign-proof-item>span{display:flex;flex-direction:column;gap:5px;padding:19px 20px 21px}
+.campaign-proof-item strong{font:800 17px/1.3 Manrope,'DM Sans',sans-serif;color:#123c6d}
+.campaign-proof-item small{color:#607994;font-size:11px;line-height:1.5}
+.campaign-proof-footer{display:flex;justify-content:space-between;align-items:center;gap:25px;background:#e8f1fd;border:1px solid #d4e4fa;border-radius:18px;padding:20px 23px;margin-top:27px}
+.campaign-proof-footer p{max-width:670px;font-size:12px;line-height:1.7;color:#50718d;margin:0}
+.campaign-proof-footer strong{color:#133f6e}
+.campaign-proof-footer .button{flex:none;font-size:12px;white-space:nowrap;min-height:42px;padding:13px 19px}
+/* Prevent floating chat from covering important footer content on phones. */
+@media(max-width:1000px){.campaign-proof-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:650px){.campaign-proof-grid{gap:13px}.campaign-proof-item{border-radius:15px}.campaign-proof-item>span{padding:13px 12px 15px}.campaign-proof-item strong{font-size:13px}.campaign-proof-item small{font-size:10px}.campaign-proof-footer{flex-direction:column;align-items:flex-start;padding:20px}.campaign-proof-footer .button{white-space:normal;width:100%;justify-content:center;text-align:center}.site-footer{padding-bottom:max(95px,calc(75px + env(safe-area-inset-bottom)))}#work .filters{scrollbar-width:thin}#work .filter{min-height:40px}.campaign-proof .section-heading{gap:12px}}
+@media(prefers-reduced-motion:reduce){.campaign-proof-item{transition:none}.campaign-proof-item:hover{transform:none}}
