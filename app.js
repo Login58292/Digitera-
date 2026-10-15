@@ -7,34 +7,66 @@ let selected, slide = 0;
 function render(filter = 'all') {
  const list = projects.filter(p => filter === 'all' || p.categories.includes(filter));
  grid.replaceChildren(...list.map((p) => {
-  const button = document.createElement('button'); button.type='button'; button.className='project-card'; button.dataset.project=p.id;
+  const button = document.createElement('button'); button.type='button'; button.className='project-card' + (p.id === 'ugc-coloring' ? ' project-card--featured-video' : ''); button.dataset.project=p.id;
   button.setAttribute('aria-label',`Explore ${p.title}`);
-  button.innerHTML=`<div class="project-image"><img src="assets/${p.cover}.webp" alt="${p.title} project artwork" loading="lazy" width="1000" height="800"><span class="project-chip">${p.categories[0]}</span><span class="project-open" aria-hidden="true">↗</span></div><div class="project-meta"><div><h3>${p.title}</h3><p>${p.subtitle}</p></div><span class="project-number">0${projects.indexOf(p)+1}</span></div>`;
+  let artwork;
+  if(p.art) {
+   const a=p.art;
+   artwork=`<div class="case-art case-art--${a.theme}" aria-label="${p.title} editorial project title card"><span class="case-art-eyebrow">${a.kicker}</span><span class="case-art-orbit" aria-hidden="true">✳</span><strong>${a.title}</strong><small>${a.foot}</small><span class="case-art-serial">DIGITERA / SELECTED WORK</span></div>`;
+  } else {
+   const extension=p.coverExt || 'webp';
+   artwork=`<img src="assets/${p.cover}.${extension}" alt="${p.title} project artwork" loading="lazy" width="1000" height="800">`;
+  }
+  const isVideo=p.id==='ugc-coloring';
+  button.innerHTML=`<div class="project-image${isVideo?' is-video-cover':''}">${artwork}<span class="project-chip">${p.label||p.categories[0]}</span>${isVideo?'<span class="project-play" aria-hidden="true">▶ &nbsp; WATCH VIDEO</span>':''}<span class="project-open" aria-hidden="true">↗</span></div><div class="project-meta"><div><h3>${p.title}</h3><p>${p.subtitle}</p></div><span class="project-number">${String(projects.indexOf(p)+1).padStart(2,'0')}</span></div>`;
   return button;
  }));
  $('result-count').textContent=`${list.length} selected project${list.length===1?'':'s'}`;
+ const count=document.querySelector('[data-filter="all"] span');if(count)count.textContent=String(projects.length);
 }
+
 render();
 document.querySelectorAll('[data-filter]').forEach(button=>button.addEventListener('click',()=>{
  document.querySelectorAll('[data-filter]').forEach(b=>{b.classList.toggle('active',b===button);b.setAttribute('aria-pressed',String(b===button));});render(button.dataset.filter);
 }));
 function gallery(index){
- slide=(index+selected.images.length)%selected.images.length;
- $('gallery-image').src=`assets/${selected.images[slide]}.webp`;
- $('gallery-image').alt=`${selected.title} — project image ${slide+1}`;
- $('gallery-position').textContent=`${slide+1} / ${selected.images.length}`;
- $('gallery-dots').replaceChildren(...selected.images.map((_,i)=>{const b=document.createElement('button');b.type='button';b.className=i===slide?'active':'';b.setAttribute('aria-label',`Show image ${i+1}`);b.setAttribute('aria-pressed',String(i===slide));b.onclick=()=>gallery(i);return b;}));
+ const media=selected.media||((selected.images||[]).map(file=>({type:'image',src:`assets/${file}.webp`})));
+ if(!media.length)media.push({type:'art'});
+ slide=(index+media.length)%media.length;
+ const item=media[slide],img=$('gallery-image'),video=$('gallery-video'),art=$('gallery-art');
+ video.pause();video.removeAttribute('src');video.hidden=true;img.hidden=true;art.hidden=true;
+ if(item.type==='video'){
+   video.src=item.src;video.poster=item.poster||'assets/ugc-coloring-poster.svg';
+   video.setAttribute('aria-label',selected.title+' — full video');video.hidden=false;video.load();
+ }else if(item.type==='art'){
+   art.className='gallery-art case-art case-art--'+(selected.art?.theme||'blue');
+   art.replaceChildren();
+   const eyebrow=document.createElement('span');eyebrow.className='case-art-eyebrow';eyebrow.textContent=selected.art?.kicker||'SELECTED WORK';
+   const main=document.createElement('strong');main.textContent=selected.art?.title||selected.title;
+   const foot=document.createElement('small');foot.textContent=selected.art?.foot||selected.subtitle;
+   art.append(eyebrow,main,foot);art.hidden=false;
+ }else{
+   img.src=item.src;img.alt=`${selected.title} — project image ${slide+1}`;img.hidden=false;
+ }
+ $('gallery-position').textContent=`${slide+1} / ${media.length}`;
+ $('gallery-dots').replaceChildren(...media.map((_,i)=>{const b=document.createElement('button');b.type='button';b.className=i===slide?'active':'';b.setAttribute('aria-label',`Show media ${i+1}`);b.setAttribute('aria-pressed',String(i===slide));b.onclick=()=>gallery(i);return b;}));
+ document.querySelector('.gallery-nav').hidden=media.length===1;
+ $('gallery-prev').disabled=media.length===1;$('gallery-next').disabled=media.length===1;
 }
+
 function tab(name){['overview','deliverables'].forEach(n=>{const active=n===name;$('tab-'+n).setAttribute('aria-selected',String(active));$('tab-'+n).tabIndex=active?0:-1;$('panel-'+n).hidden=!active;});}
 function openProject(id){
  selected=projects.find(p=>p.id===id);if(!selected)return;
  $('project-title').textContent=selected.title;$('project-subtitle').textContent=selected.subtitle;$('project-description').textContent=selected.description;
  $('project-category').textContent=selected.categories.join(' / ');$('panel-overview').textContent=selected.overview;
  const ul=document.createElement('ul');selected.deliverables.forEach(item=>{const li=document.createElement('li');li.textContent=item;ul.append(li);});$('panel-deliverables').replaceChildren(ul);
+ const external=$('project-external');if(external){external.hidden=!selected.url;if(selected.url){external.href=selected.url;external.textContent=selected.linkLabel||'View related website ↗';}}
  gallery(0);tab('overview');dialog.showModal();document.body.style.overflow='hidden';
 }
+
 document.addEventListener('click',e=>{const b=e.target.closest('[data-project]');if(b)openProject(b.dataset.project);});
-$('project-close').onclick=()=>dialog.close();$('gallery-prev').onclick=()=>gallery(slide-1);$('gallery-next').onclick=()=>gallery(slide+1);
+$('project-close').onclick=()=>dialog.close();
+dialog.addEventListener('close',()=>{$('gallery-video').pause();$('gallery-video').removeAttribute('src');});$('gallery-prev').onclick=()=>gallery(slide-1);$('gallery-next').onclick=()=>gallery(slide+1);
 ['overview','deliverables'].forEach(name=>{$('tab-'+name).onclick=()=>tab(name);$('tab-'+name).onkeydown=e=>{if(['ArrowLeft','ArrowRight','Home','End'].includes(e.key)){e.preventDefault();const next=e.key==='Home'?'overview':e.key==='End'?'deliverables':name==='overview'?'deliverables':'overview';tab(next);$('tab-'+next).focus();}};});
 dialog.addEventListener('keydown',e=>{if(e.target.closest('.modal-gallery')&&['ArrowLeft','ArrowRight'].includes(e.key)){e.preventDefault();gallery(slide+(e.key==='ArrowRight'?1:-1));}});
 $('project-enquire').onclick=()=>{ $('message').value=`I'd like to discuss a project inspired by ${selected.title}. `;dialog.close();setTimeout(()=>$('name').focus({preventScroll:true}),200);};
