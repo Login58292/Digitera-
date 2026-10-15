@@ -87,3 +87,18 @@ html { scroll-padding-top: 28px; }
 @media(max-width:850px) { .deliverables-grid { grid-template-columns: 1fr 1fr; } .deliverables-grid article:last-child { grid-column: 1 / -1; } }
 @media(max-width:600px) { .deliverables-section { padding-top: 25px; padding-bottom: 54px; } .deliverables-grid { grid-template-columns: 1fr; gap: 13px; } .deliverables-grid article:last-child { grid-column: auto; } .deliverables-grid article { padding: 24px 22px; } .deliverables-number { margin-bottom: 15px; } .deliverables-grid p { margin-bottom: 18px; } .deliverables-footer { align-items: stretch; flex-direction: column; } .deliverables-footer .button { justify-content: center; text-align: center; } }
 @media(prefers-reduced-motion:reduce) { .deliverables-grid article { animation: none !important; } }
+
+
+/* Answers and trust: conversion-friendly without unsupported results claims. */
+.decision-faq { padding-top: 65px; padding-bottom: 80px; }
+.decision-faq-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: 15px; }
+.decision-faq details { border: 1px solid #d8e6f6; border-radius: 18px; background: #f7faff; padding: 22px 24px; }
+.decision-faq summary { display: flex; align-items: start; justify-content: space-between; gap: 17px; cursor: pointer; color: #163b65; font: 800 17px/1.4 Manrope,'DM Sans',sans-serif; letter-spacing: -.35px; list-style: none; }
+.decision-faq summary::-webkit-details-marker { display: none; }
+.decision-faq summary span { flex: none; color: #1e6baf; font-size: 27px; font-weight: 500; line-height: 1; }
+.decision-faq details[open] summary span { transform: rotate(45deg); }
+.decision-faq details p { color: #506d89; font-size: 13px; line-height: 1.8; margin-top: 15px; }
+.decision-faq details a { display: inline-block; margin-top: 13px; color: #0e60ab; font-size: 12px; font-weight: 800; text-decoration: underline; text-underline-offset: 3px; }
+.about-capabilities strong { font-size: clamp(20px, 2.2vw, 30px); white-space: normal; letter-spacing: -.5px; }
+@media (max-width: 720px) { .decision-faq { padding-top: 45px; padding-bottom: 55px; } .decision-faq-grid { grid-template-columns: 1fr; } .decision-faq details { padding: 20px; } .decision-faq summary { font-size: 15px; } .about-capabilities strong { font-size: 20px; } }
+@media (prefers-reduced-motion: reduce) { .decision-faq summary span { transition: none; } }

@@ -118,3 +118,26 @@ if (reviewsTrack) {
  window.addEventListener('resize', updateReviewControls);
  updateReviewControls();
 }
+
+
+/* Public case-study links prepare editable local enquiry text; never send on their own. */
+(() => {
+  const enquiryKey = new URLSearchParams(window.location.search).get('project');
+  if (!enquiryKey) return;
+  const allowed = {
+    'qasrdecor': { service: 'Website presentation & SEO', brief: "I'd like to discuss a website presentation or a service-led website project similar in scope to Qasr Decor." },
+    'apex-limo': { service: 'Marketing & social media', brief: "I'd like a marketing research and SEO opportunity review for my service business. Please clarify scope and deliverables." },
+    'ugc-coloring': { service: 'Video & creative content', brief: "I'd like to discuss a social-first product video advertisement with clear deliverables and next steps." },
+    'general': { service: 'Something else', brief: "I'd like to discuss a digital creative or marketing project." }
+  };
+  const selectedBrief = allowed[enquiryKey];
+  const serviceInput = document.getElementById('service');
+  const messageInput = document.getElementById('message');
+  if (!selectedBrief || !serviceInput || !messageInput) return;
+  if ([...serviceInput.options].some(option => option.value === selectedBrief.service)) {
+    serviceInput.value = selectedBrief.service;
+  }
+  if (!messageInput.value.trim()) messageInput.value = selectedBrief.brief;
+  const note = document.getElementById('form-status');
+  if (note) note.textContent = 'An editable project brief has been prepared below. Review before sending.';
+})();

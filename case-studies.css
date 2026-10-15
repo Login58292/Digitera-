@@ -10,3 +10,11 @@
 @media(max-width:850px){.evidence-grid,.strategy-grid{grid-template-columns:1fr 1fr}.evidence-grid a:last-child,.strategy-grid article:last-child{grid-column:1/-1}.strategy-bridge{padding:35px}}
 @media(max-width:620px){.evidence-index{padding:23px 19px;margin-bottom:0}.evidence-grid,.strategy-grid,.case-answers{grid-template-columns:1fr}.evidence-grid a:last-child,.strategy-grid article:last-child{grid-column:auto}.strategy-bridge{margin-top:48px;padding:28px 21px}.strategy-action{flex-direction:column;align-items:stretch}.strategy-action .btn{width:100%}.case-answers{gap:8px}.evidence-grid a{padding:17px}.audit-checklist{padding:18px}}
 @media(prefers-reduced-motion:reduce){.evidence-grid a{transition:none}.evidence-grid a:hover{transform:none}}
+
+
+/* Explain evidence limits in plain language without weakening the portfolio. */
+.project-evidence-note { padding: 35px 40px; margin-top: 64px; margin-bottom: 0; border: 1px solid #d1e5f7; border-left: 4px solid #2083be; background: #eef6ff; border-radius: 18px; }
+.project-evidence-note h2 { font: 800 clamp(27px, 3vw, 39px)/1.17 Manrope,'DM Sans',sans-serif; letter-spacing: -1.5px; margin-bottom: 12px; color: #153b65; }
+.project-evidence-note p:not(.eyebrow) { color: #526d88; font-size: 13px; line-height: 1.8; max-width: 850px; }
+.project-evidence-note a { display: inline-block; margin-top: 15px; }
+@media(max-width:620px) { .project-evidence-note { padding: 27px 23px; margin-top: 41px; } }
