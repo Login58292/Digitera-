@@ -1,0 +1,28 @@
+name: DigiTera portfolio source QA
+on:
+  pull_request:
+    paths:
+      - '**.html'
+      - '**.css'
+      - '**.js'
+      - 'assets/**'
+      - '.github/workflows/portfolio-pr-check.yml'
+  workflow_dispatch:
+
+jobs:
+  validate-portfolio:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check JavaScript syntax
+        run: |
+          node --check app.js
+          node --check projects.js
+          node --check scripts/check-portfolio.mjs
+      - name: Verify static links and portfolio facts
+        run: node scripts/check-portfolio.mjs

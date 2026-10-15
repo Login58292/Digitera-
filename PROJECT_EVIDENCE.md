@@ -33,3 +33,10 @@ Never represent a research framework as a completed SEO audit, a concept as a bu
 - **Do not merge** or configure GitHub Pages to deploy a feature or preview branch until the owner approves it.
 
 No live branch changes are necessary for preview. Case studies intentionally contain no fabricated conversion metrics, testimonials or guaranteed marketing outcomes.
+
+## Additional production safeguards
+- **Identity claims:** The original draft contained uncorroborated numerical years-of-experience, learner and country counts. These are no longer presented as verified statistics; the owner can restore accurate figures after reviewing records.
+- **SEO:** Meta titles, descriptions and modest structured data can be reviewed before launch, but a production canonical URL or sitemap requires the exact approved domain.
+- **Tracking:** No analytics SDK, pixels or campaign conversion metrics have been configured. Any tracking requires disclosure and an approved measurement plan.
+- **Case-study briefs:** Project enquiry links only insert editable local form text using a fixed allowlist. Forms still require the visitor to send an email or WhatsApp message.
+- **External media:** Request permission-cleared, durable copies of client visuals where available; the site may depend on external video hosting and previews.

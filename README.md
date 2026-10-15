@@ -65,3 +65,13 @@ The PR branch holds the complete update and stays separate from the live site. I
 - Added `PROJECT_EVIDENCE.md` for permissions, source artifacts and what can legitimately be described as an outcome.
 - Run `node scripts/check-portfolio.mjs` to check hash links, source assets, project IDs and content boundaries. Browser/device QA and external link checks still require a human review.
 - The feature PR remains separate from `main`; merging is reserved for owner approval.
+
+## Client-ready marketing polish (not published)
+- Differentiated homepage and case-study SEO titles, descriptions, and social metadata. Added minimal `ProfessionalService` JSON-LD using known brand and contact information. No invented reviews, sales or performance figures.
+- Added decision FAQs, client-friendly deliverable definitions and explicit research-versus-creative proof labels.
+- Changed unverified numerical experience and learner claims in the personal bio to skills-based statements pending confirmation. Existing portfolio work and project assets remain intact.
+- Added project-specific **editable** enquiry draft links from Qasr, Apex and video examples; `app.js` only prepares text locally, and visitors must choose to send.
+- Website logos now load from the repository's existing local branded asset. Original video and gallery content is preserved.
+- Source checks run via `node scripts/check-portfolio.mjs`, with a GitHub Actions PR workflow at `.github/workflows/portfolio-pr-check.yml`. Check whether GitHub actually reports a green run before calling CI passed.
+- Avoid publishing a canonical URL or XML sitemap with an invented production domain; configure those after confirming the real domain and its deployment path.
+- Real browser/device testing, client approval, external hosting checks and permission to display identifiable work remain necessary before merging the feature PR to `main`.
