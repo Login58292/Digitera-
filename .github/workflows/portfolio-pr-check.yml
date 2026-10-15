@@ -6,6 +6,8 @@ on:
       - '**.css'
       - '**.js'
       - 'assets/**'
+      - 'README.md'
+      - 'PROJECT_EVIDENCE.md'
       - '.github/workflows/portfolio-pr-check.yml'
   workflow_dispatch:
 

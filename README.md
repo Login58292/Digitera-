@@ -29,7 +29,7 @@ Project descriptions distinguish independent visual studies from commissioned wo
 
 - **Project stories:** Edit the three cards in `index.html` under `#case-studies`. These summarize Qasr Decor (website preview), Apex Limo SF (marketing research), and the coloring-book video ad (playable creative). Their **Project details** buttons use existing project IDs from `projects.js` and open the original accessible portfolio dialog.
 - **Floating WhatsApp:** The fixed **Chat with us** link near the end of `index.html` opens `wa.me/923191520187`. Update the number consistently in the header contact links, packages, form handler in `app.js`, and this button if the business number changes.
-- **Styling:** New responsive, reduced-motion-friendly styles live in `client-upgrade.css`. Original styling and interaction files are unchanged.
+- **Styling:** New responsive styles live in `client-upgrade.css`. Earlier design stylesheets remain unchanged; `app.js` also adds guarded, editable case-study enquiry prefilling without changing the existing submission flow.
 - **Evidence and claims:** Publish client-approved screenshots and actual campaign assets only with permission. Keep website previews, independent research, proposed concepts, and completed commissions clearly distinguished. Add traffic, rankings, sales or review claims only after verifying original data and client permission.
 - **Feedback:** Review the existing testimonial text and permission to display names before presenting testimonials as verified client endorsements.
 - **Release:** Merge the pull request to publish through an existing main-branch GitHub Pages configuration. Until then the live branch remains unchanged.
