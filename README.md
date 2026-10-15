@@ -57,3 +57,11 @@ Do not turn strategies or recommendations into claimed customer outcomes. If app
 ### Review and publish
 
 The PR branch holds the complete update and stays separate from the live site. Inspect `index.html` and `case-studies.html` across phone and desktop sizes. Review external project destinations and WhatsApp text before merging. Changes merge into `main` only with the site owner's approval.
+
+## Client-requested clarity and implementation QA
+
+- The homepage now explains **define → build → review** and links into project enquiries, instead of displaying unverified numerical experience or audience claims.
+- The case-study page distinguishes the Qasr website preview, Apex marketing research and playable advertising asset in an evidence index. Added specific project scope notes and a research framework clearly labeled as proposed diagnostic steps, not completed campaign findings.
+- Added `PROJECT_EVIDENCE.md` for permissions, source artifacts and what can legitimately be described as an outcome.
+- Run `node scripts/check-portfolio.mjs` to check hash links, source assets, project IDs and content boundaries. Browser/device QA and external link checks still require a human review.
+- The feature PR remains separate from `main`; merging is reserved for owner approval.
