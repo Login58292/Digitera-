@@ -59,4 +59,32 @@ for (const filename of ['styles.css','refresh.css','studio.css','portfolio.css',
     `Unbalanced CSS: ${filename}`);
 }
 assert.ok(!homepage.includes('1,000+ learners'), 'Unsupported numerical hero claim found');
+
+const servicesSection = homepage.match(/<section class="section wrap services-section" id="services">([\s\S]*?)<\/section>/)?.[1] || '';
+assert.equal((servicesSection.match(/<details\b/g) || []).length, 8, 'Expected eight services: Digital resources belongs in navigation');
+assert.ok(servicesSection.includes('<h3>Visuals &amp; Animation</h3>'), 'Visuals & Animation service missing');
+assert.ok(servicesSection.includes('<h3>AI Automation</h3>'), 'AI Automation service missing');
+assert.ok(!servicesSection.includes('<h3>Digital resources &amp; tools</h3>'), 'Resources should not be a service card');
+assert.ok(homepage.includes('<section class="section wrap digitera-resources-section" id="digital-resources"'), 'Standalone resources section missing');
+assert.ok(homepage.includes('<h2 id="digital-resources-title">Digital resources'), 'Resources heading missing');
+const desktopNav = homepage.match(/<nav class="desktop-nav"[^>]*>([\s\S]*?)<\/nav>/)?.[1] || '';
+const mobileNav = homepage.match(/<nav id="mobile-nav"[^>]*>([\s\S]*?)<\/nav>/)?.[1] || '';
+assert.ok(desktopNav.includes('<a href="#digital-resources" aria-label="Resources &amp; tools">Resources &amp;<br>tools</a>'), 'Desktop resources link should show Resources & tools on two lines');
+assert.ok(mobileNav.includes('<a href="#digital-resources">Digital resources &amp; tools</a>'), 'Mobile resources navigation must remain unchanged');
+assert.ok(!servicesSection.includes('class="service-subcategory"'), 'Old nested Digital Resources block must be removed');
+for (const option of ['Visuals & Animation', 'AI Automation']) {
+  assert.ok(homepage.includes(`<option>${option}</option>`), `Contact option missing: ${option}`);
+}
+assert.ok(homepage.includes('<option>Digital resources &amp; tools</option>'), 'Digital resources & tools contact option missing');
+assert.ok(homepage.includes('CEO of DigiTera'), 'CEO identity missing');
+assert.ok(homepage.includes('initiative for futuristic learning'), 'DigiTera learning initiative missing');
+assert.equal(content('CNAME').trim(), 'digitera.art', 'Custom domain must remain unchanged');
+const newCss = content('services-enhancements.css');
+assert.equal((newCss.match(/{/g) || []).length, (newCss.match(/}/g) || []).length, 'Unbalanced services CSS');
+assert.ok(newCss.includes('prefers-reduced-motion'), 'Services animation must respect reduced motion');
+assert.ok(newCss.includes('@media (max-width: 600px) {\n  .desktop-nav, .site-header .header-cta'), 'Mobile menu must only replace desktop navigation at 600px or less');
+assert.ok(!newCss.includes('@media (max-width: 950px) {\n  .desktop-nav'), 'Desktop nav must not be hidden at tablet/desktop preview widths');
+assert.ok(handler.includes('window.innerWidth>600)closeMenu()'), 'Menu JS breakpoint must match 600px CSS');
+
+
 console.log('PASS: SEO, schema, internal anchors, static resources, IDs, evidence and brief routing.');
