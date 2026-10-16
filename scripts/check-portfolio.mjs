@@ -61,13 +61,15 @@ for (const filename of ['styles.css','refresh.css','studio.css','portfolio.css',
 assert.ok(!homepage.includes('1,000+ learners'), 'Unsupported numerical hero claim found');
 
 const servicesSection = homepage.match(/<section class="section wrap services-section" id="services">([\s\S]*?)<\/section>/)?.[1] || '';
-assert.equal((servicesSection.match(/<details\b/g) || []).length, 8, 'Expected eight service cards');
+assert.equal((servicesSection.match(/<details\b/g) || []).length, 9, 'Expected nine top-level service cards');
 assert.ok(servicesSection.includes('<h3>Visuals &amp; Animation</h3>'), 'Visuals & Animation service missing');
 assert.ok(servicesSection.includes('<h3>AI Automation</h3>'), 'AI Automation service missing');
-assert.ok(servicesSection.includes('<h4>Digital Resources</h4>'), 'Digital Resources subcategory missing');
-for (const option of ['Visuals & Animation', 'AI Automation', 'Digital Resources']) {
+assert.ok(servicesSection.includes('<h3>Digital resources &amp; tools</h3>'), 'Digital resources & tools service missing');
+assert.ok(!servicesSection.includes('class="service-subcategory"'), 'Old nested Digital Resources block must be removed');
+for (const option of ['Visuals & Animation', 'AI Automation']) {
   assert.ok(homepage.includes(`<option>${option}</option>`), `Contact option missing: ${option}`);
 }
+assert.ok(homepage.includes('<option>Digital resources &amp; tools</option>'), 'Digital resources & tools contact option missing');
 assert.ok(homepage.includes('CEO of DigiTera'), 'CEO identity missing');
 assert.ok(homepage.includes('initiative for futuristic learning'), 'DigiTera learning initiative missing');
 assert.equal(content('CNAME').trim(), 'digitera.art', 'Custom domain must remain unchanged');
