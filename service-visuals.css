@@ -1,0 +1,82 @@
+/* Eight original, self-contained vector illustrations for DigiTera service cards.
+   They are always visible in the clickable accordion header, including before expansion.
+   No external images, fonts, scripts, or network dependencies. */
+.services-section .service-list details {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+}
+.services-section .service-list details summary .service-visual {
+  --art-glow: #b9d7fa;
+  position: relative;
+  display: flex;
+  flex: 1 0 100%;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  height: 132px;
+  margin-top: 10px;
+  overflow: hidden;
+  border: 1px solid #d1e5f9;
+  border-radius: 15px;
+  background: linear-gradient(137deg, #edf8ff, #e1edff 73%, #d5e8ff);
+  pointer-events: none;
+  isolation: isolate;
+}
+.services-section .service-visual::before,
+.services-section .service-visual::after {
+  content: '';
+  position: absolute;
+  width: 115px;
+  height: 115px;
+  border-radius: 50%;
+  background: var(--art-glow);
+  opacity: .3;
+  filter: blur(22px);
+}
+.services-section .service-visual::before { left: -37px; top: -55px; }
+.services-section .service-visual::after { right: -27px; bottom: -71px; }
+.services-section .service-visual svg {
+  display: block;
+  position: relative;
+  z-index: 1;
+  width: min(100%, 280px);
+  height: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 7px 9px rgba(9, 55, 117, .1));
+  transition: transform .3s ease;
+}
+.services-section .service-list details:hover .service-visual svg,
+.services-section .service-list details summary:focus-visible .service-visual svg {
+  transform: translateY(-3px) scale(1.025);
+}
+.services-section .service-list details[open] .service-visual {
+  height: 84px;
+  margin-bottom: 6px;
+}
+.services-section .service-list details[open] .service-visual svg {
+  width: min(100%, 195px);
+}
+.services-section .service-visual--brand { --art-glow: #b4b5ff; background: linear-gradient(135deg,#f2f5ff,#dbefff); }
+.services-section .service-visual--video { --art-glow: #72dcff; background: linear-gradient(135deg,#e7faff,#d9e8ff); }
+.services-section .service-visual--marketing { --art-glow: #a9d4ff; background: linear-gradient(135deg,#e6f3ff,#d9f1f9); }
+.services-section .service-visual--web { --art-glow: #83caff; background: linear-gradient(135deg,#edf9ff,#e3e9ff); }
+.services-section .service-visual--product { --art-glow: #8bdcff; background: linear-gradient(135deg,#eefbff,#e2efff); }
+.services-section .service-visual--learning { --art-glow: #afccff; background: linear-gradient(135deg,#eef5ff,#dcf5ff); }
+.services-section .service-visual--motion { --art-glow: #62b4ff; background: linear-gradient(135deg,#eaf7ff,#dceaff); }
+.services-section .service-visual--automation { --art-glow: #7bdcf0; background: linear-gradient(135deg,#e6f9ff,#dceaff); }
+@media (max-width: 800px) {
+  .services-section .service-list details summary .service-visual { height: 122px; }
+  .services-section .service-list details[open] .service-visual { height: 84px; }
+}
+@media (max-width: 600px) {
+  .services-section .service-list details summary .service-visual { height: 134px; margin-top: 12px; }
+  .services-section .service-list details[open] .service-visual { height: 95px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .services-section .service-visual svg { transition: none; }
+  .services-section .service-list details:hover .service-visual svg,
+  .services-section .service-list details summary:focus-visible .service-visual svg { transform: none; }
+}
