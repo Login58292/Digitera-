@@ -106,26 +106,6 @@
   background: #2187d9;
   animation: digitera-data-flow 2.4s ease-in-out infinite;
 }
-.services-section .service-subcategory {
-  margin-top: 18px;
-  padding: 14px;
-  border: 1px solid #cfdef2;
-  border-radius: 12px;
-  background: #fff;
-}
-.services-section .service-subcategory h4 {
-  margin: 0 0 6px;
-  color: #123c79;
-  font-size: 15px;
-  line-height: 1.35;
-}
-.services-section .service-subcategory p {
-  margin: 0 0 10px;
-  font-size: 12px;
-}
-.services-section .service-subcategory .chips {
-  margin-top: 8px;
-}
 @keyframes digitera-ring-spin {
   from { transform: rotate(18deg); }
   to { transform: rotate(378deg); }
