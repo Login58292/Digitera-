@@ -76,7 +76,7 @@ const menu=document.querySelector('[aria-controls="mobile-nav"]');const mobile=$
 function closeMenu(){mobile.hidden=true;menu.setAttribute('aria-expanded','false');}
 menu.onclick=()=>{const open=menu.getAttribute('aria-expanded')!=='true';menu.setAttribute('aria-expanded',String(open));mobile.hidden=!open;};
 mobile.querySelectorAll('a').forEach(a=>a.onclick=closeMenu);document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu();});
-window.addEventListener('resize',()=>{if(window.innerWidth>950)closeMenu();});
+window.addEventListener('resize',()=>{if(window.innerWidth>600)closeMenu();});
 $('contact-form').addEventListener('submit',e=>{e.preventDefault();const form=e.currentTarget;if(!form.reportValidity())return;const text=`Hi Rubab,\n\nI'm ${$('name').value.trim()}.\nEmail: ${$('email').value.trim()}\nService: ${$('service').value}\n\n${$('message').value.trim()}`;const email=e.submitter?.value==='email';const url=email?`mailto:digitera.info@gmail.com?subject=${encodeURIComponent('DigiTera project enquiry — '+$('service').value)}&body=${encodeURIComponent(text)}`:`https://wa.me/923191520187?text=${encodeURIComponent(text)}`;if(email)window.location.href=url;else window.open(url,'_blank','noopener,noreferrer');$('form-status').textContent=`Your ${email?'email':'WhatsApp'} draft is ready to open. Review it in your app and send when you’re ready.`;});
 $('copy-email').onclick=async()=>{try{await navigator.clipboard.writeText('digitera.info@gmail.com');$('toast').textContent='Email address copied';$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),2500);}catch{$('copy-email').textContent='digitera.info@gmail.com';}};
 $('year').textContent=new Date().getFullYear();
