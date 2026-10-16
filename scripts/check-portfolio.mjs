@@ -64,6 +64,15 @@ const servicesSection = homepage.match(/<section class="section wrap services-se
 assert.equal((servicesSection.match(/<details\b/g) || []).length, 8, 'Expected eight services: Digital resources belongs in navigation');
 assert.ok(servicesSection.includes('<h3>Visuals &amp; Animation</h3>'), 'Visuals & Animation service missing');
 assert.ok(servicesSection.includes('<h3>AI Automation</h3>'), 'AI Automation service missing');
+assert.equal((servicesSection.match(/class="service-visual service-visual--/g) || []).length, 8,
+  'Each of the eight services needs a visible vector illustration');
+assert.equal((servicesSection.match(/class="service-visual service-visual--[^"]+" aria-hidden="true"/g) || []).length, 8,
+  'Illustrations should remain decorative to assistive technology');
+assert.ok(homepage.includes('href="service-visuals.css"'), 'Service illustrations stylesheet is missing');
+const illustrationCss = content('service-visuals.css');
+assert.equal((illustrationCss.match(/{/g) || []).length, (illustrationCss.match(/}/g) || []).length,
+  'Unbalanced service illustration CSS');
+assert.ok(illustrationCss.includes('prefers-reduced-motion'), 'Illustration motion must be optional');
 assert.ok(!servicesSection.includes('<h3>Digital resources &amp; tools</h3>'), 'Resources should not be a service card');
 assert.ok(homepage.includes('<section class="section wrap digitera-resources-section" id="digital-resources"'), 'Standalone resources section missing');
 assert.ok(homepage.includes('<h2 id="digital-resources-title">Digital resources'), 'Resources heading missing');
