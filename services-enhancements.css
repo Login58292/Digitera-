@@ -137,3 +137,71 @@
     transform: none !important;
   }
 }
+
+/* Resources now live in top-level navigation, not the Services accordion. */
+.desktop-nav { gap: clamp(9px, 1.1vw, 20px); font-size: 11px; white-space: nowrap; }
+.digitera-resources-section { scroll-margin-top: 80px; }
+.digitera-resources-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.digitera-resources-grid article {
+  min-width: 0;
+  padding: 25px 22px;
+  background: linear-gradient(145deg, #f4f8fe, #eaf3ff);
+  border: 1px solid #dce7f3;
+  border-radius: 19px;
+}
+.digitera-resources-grid article > span {
+  display: block;
+  margin-bottom: 25px;
+  color: #226bb2;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .09em;
+}
+.digitera-resources-grid h3 { font-size: 19px; line-height: 1.3; color: #102b50; }
+.digitera-resources-grid p { margin-top: 10px; font-size: 13px; color: #526d87; }
+.digitera-resources-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-top: 23px;
+}
+.digitera-resources-footer p { max-width: 660px; color: #526d87; font-size: 13px; }
+.digitera-resources-footer .button { flex-shrink: 0; }
+@media (max-width: 1100px) {
+  .digitera-resources-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 950px) {
+  .desktop-nav, .site-header .header-cta { display: none !important; }
+  .site-header .menu-toggle {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 5px; flex-shrink: 0; width: 46px; height: 46px; margin-left: auto;
+    padding: 13px; border: 1px solid #ffffff5a; border-radius: 50%;
+  }
+  .site-header .menu-toggle span {
+    display: block; width: 17px; height: 2px; background: #fff;
+    transition: transform .2s ease;
+  }
+  .site-header .menu-toggle[aria-expanded="true"] span:first-child { transform: translateY(3.5px) rotate(45deg); }
+  .site-header .menu-toggle[aria-expanded="true"] span:last-child { transform: translateY(-3.5px) rotate(-45deg); }
+  .site-header .mobile-nav {
+    display: flex; flex-direction: column; position: absolute;
+    top: calc(100% + 7px); left: 0; right: 0;
+    padding: 12px 22px 20px; max-height: min(70vh, 540px); overflow-y: auto;
+    border: 1px solid #345d88; border-radius: 18px;
+    background: #08294f; color: #fff;
+    box-shadow: 0 20px 44px #06244d47;
+    z-index: 20;
+  }
+  .site-header .mobile-nav a {
+    display: block; padding: 12px 0; font-size: 14px;
+    border-bottom: 1px solid #ffffff2a;
+  }
+}
+@media (max-width: 600px) {
+  .digitera-resources-grid { grid-template-columns: 1fr; gap: 12px; }
+  .digitera-resources-grid article { padding: 22px 20px; }
+  .digitera-resources-grid article > span { margin-bottom: 14px; }
+  .digitera-resources-footer { align-items: stretch; flex-direction: column; }
+  .digitera-resources-footer .button { align-self: flex-start; }
+}
