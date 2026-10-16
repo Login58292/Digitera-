@@ -69,9 +69,8 @@ assert.ok(homepage.includes('<section class="section wrap digitera-resources-sec
 assert.ok(homepage.includes('<h2 id="digital-resources-title">Digital resources'), 'Resources heading missing');
 const desktopNav = homepage.match(/<nav class="desktop-nav"[^>]*>([\s\S]*?)<\/nav>/)?.[1] || '';
 const mobileNav = homepage.match(/<nav id="mobile-nav"[^>]*>([\s\S]*?)<\/nav>/)?.[1] || '';
-for (const nav of [desktopNav, mobileNav]) {
-  assert.ok(nav.includes('<a href="#digital-resources">Digital resources &amp; tools</a>'), 'Resources missing from navigation');
-}
+assert.ok(desktopNav.includes('<a href="#digital-resources" aria-label="Resources &amp; tools">Resources &amp;<br>tools</a>'), 'Desktop resources link should show Resources & tools on two lines');
+assert.ok(mobileNav.includes('<a href="#digital-resources">Digital resources &amp; tools</a>'), 'Mobile resources navigation must remain unchanged');
 assert.ok(!servicesSection.includes('class="service-subcategory"'), 'Old nested Digital Resources block must be removed');
 for (const option of ['Visuals & Animation', 'AI Automation']) {
   assert.ok(homepage.includes(`<option>${option}</option>`), `Contact option missing: ${option}`);
