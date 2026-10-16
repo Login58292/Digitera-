@@ -61,10 +61,17 @@ for (const filename of ['styles.css','refresh.css','studio.css','portfolio.css',
 assert.ok(!homepage.includes('1,000+ learners'), 'Unsupported numerical hero claim found');
 
 const servicesSection = homepage.match(/<section class="section wrap services-section" id="services">([\s\S]*?)<\/section>/)?.[1] || '';
-assert.equal((servicesSection.match(/<details\b/g) || []).length, 9, 'Expected nine top-level service cards');
+assert.equal((servicesSection.match(/<details\b/g) || []).length, 8, 'Expected eight services: Digital resources belongs in navigation');
 assert.ok(servicesSection.includes('<h3>Visuals &amp; Animation</h3>'), 'Visuals & Animation service missing');
 assert.ok(servicesSection.includes('<h3>AI Automation</h3>'), 'AI Automation service missing');
-assert.ok(servicesSection.includes('<h3>Digital resources &amp; tools</h3>'), 'Digital resources & tools service missing');
+assert.ok(!servicesSection.includes('<h3>Digital resources &amp; tools</h3>'), 'Resources should not be a service card');
+assert.ok(homepage.includes('<section class="section wrap digitera-resources-section" id="digital-resources"'), 'Standalone resources section missing');
+assert.ok(homepage.includes('<h2 id="digital-resources-title">Digital resources'), 'Resources heading missing');
+const desktopNav = homepage.match(/<nav class="desktop-nav"[^>]*>([\s\S]*?)<\/nav>/)?.[1] || '';
+const mobileNav = homepage.match(/<nav id="mobile-nav"[^>]*>([\s\S]*?)<\/nav>/)?.[1] || '';
+for (const nav of [desktopNav, mobileNav]) {
+  assert.ok(nav.includes('<a href="#digital-resources">Digital resources &amp; tools</a>'), 'Resources missing from navigation');
+}
 assert.ok(!servicesSection.includes('class="service-subcategory"'), 'Old nested Digital Resources block must be removed');
 for (const option of ['Visuals & Animation', 'AI Automation']) {
   assert.ok(homepage.includes(`<option>${option}</option>`), `Contact option missing: ${option}`);
