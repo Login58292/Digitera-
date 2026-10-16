@@ -59,4 +59,20 @@ for (const filename of ['styles.css','refresh.css','studio.css','portfolio.css',
     `Unbalanced CSS: ${filename}`);
 }
 assert.ok(!homepage.includes('1,000+ learners'), 'Unsupported numerical hero claim found');
+
+const servicesSection = homepage.match(/<section class="section wrap services-section" id="services">([\s\S]*?)<\/section>/)?.[1] || '';
+assert.equal((servicesSection.match(/<details\b/g) || []).length, 8, 'Expected eight service cards');
+assert.ok(servicesSection.includes('<h3>Visuals &amp; Animation</h3>'), 'Visuals & Animation service missing');
+assert.ok(servicesSection.includes('<h3>AI Automation</h3>'), 'AI Automation service missing');
+assert.ok(servicesSection.includes('<h4>Digital Resources</h4>'), 'Digital Resources subcategory missing');
+for (const option of ['Visuals & Animation', 'AI Automation', 'Digital Resources']) {
+  assert.ok(homepage.includes(`<option>${option}</option>`), `Contact option missing: ${option}`);
+}
+assert.ok(homepage.includes('CEO of DigiTera'), 'CEO identity missing');
+assert.ok(homepage.includes('initiative for futuristic learning'), 'DigiTera learning initiative missing');
+assert.equal(content('CNAME').trim(), 'digitera.art', 'Custom domain must remain unchanged');
+const newCss = content('services-enhancements.css');
+assert.equal((newCss.match(/{/g) || []).length, (newCss.match(/}/g) || []).length, 'Unbalanced services CSS');
+assert.ok(newCss.includes('prefers-reduced-motion'), 'Services animation must respect reduced motion');
+
 console.log('PASS: SEO, schema, internal anchors, static resources, IDs, evidence and brief routing.');
