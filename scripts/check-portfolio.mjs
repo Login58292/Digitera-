@@ -83,5 +83,9 @@ assert.equal(content('CNAME').trim(), 'digitera.art', 'Custom domain must remain
 const newCss = content('services-enhancements.css');
 assert.equal((newCss.match(/{/g) || []).length, (newCss.match(/}/g) || []).length, 'Unbalanced services CSS');
 assert.ok(newCss.includes('prefers-reduced-motion'), 'Services animation must respect reduced motion');
+assert.ok(newCss.includes('@media (max-width: 600px) {\n  .desktop-nav, .site-header .header-cta'), 'Mobile menu must only replace desktop navigation at 600px or less');
+assert.ok(!newCss.includes('@media (max-width: 950px) {\n  .desktop-nav'), 'Desktop nav must not be hidden at tablet/desktop preview widths');
+assert.ok(handler.includes('window.innerWidth>600)closeMenu()'), 'Menu JS breakpoint must match 600px CSS');
+
 
 console.log('PASS: SEO, schema, internal anchors, static resources, IDs, evidence and brief routing.');
