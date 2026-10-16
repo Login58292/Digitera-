@@ -1,0 +1,159 @@
+/* DigiTera services additions: scoped decorative previews and accessible motion. */
+.services-section .service-card--motion,
+.services-section .service-card--automation {
+  border-color: #c9ddf5;
+  background: linear-gradient(145deg, #f4f8fe, #e9f3ff);
+}
+.services-section .service-list details summary:focus-visible {
+  outline: 3px solid #2075da;
+  outline-offset: 6px;
+  border-radius: 8px;
+}
+.services-section .service-preview {
+  position: relative;
+  display: flex;
+  height: 110px;
+  width: 100%;
+  margin: 16px 0;
+  overflow: hidden;
+  border-radius: 14px;
+  isolation: isolate;
+}
+.services-section .motion-preview {
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(120deg, #133772, #2868bd 55%, #4ac2dc);
+}
+.services-section .motion-preview__ring {
+  position: absolute;
+  height: 158px;
+  width: 158px;
+  border: 1px solid rgba(255, 255, 255, .58);
+  border-radius: 34%;
+  transform: rotate(18deg);
+  animation: digitera-ring-spin 12s linear infinite;
+}
+.services-section .motion-preview__ring--inner {
+  height: 112px;
+  width: 112px;
+  border-width: 2px;
+  border-radius: 25%;
+  transform: rotate(-18deg);
+  animation-direction: reverse;
+  animation-duration: 9s;
+}
+.services-section .motion-preview__star {
+  position: relative;
+  z-index: 1;
+  color: #fff;
+  font-size: 35px;
+  text-shadow: 0 0 22px #bceeff;
+  animation: digitera-spark-pulse 3s ease-in-out infinite;
+}
+.services-section .service-preview__label {
+  position: absolute;
+  left: 13px;
+  bottom: 9px;
+  font-size: 9px;
+  letter-spacing: .12em;
+  color: #fff;
+  font-weight: 700;
+}
+.services-section .automation-preview {
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 12px;
+  background: linear-gradient(125deg, #e2f3ff, #d2e5fc);
+  border: 1px solid #bbdcf5;
+}
+.services-section .automation-preview__node {
+  display: grid;
+  place-items: center;
+  flex: 0 1 65px;
+  min-width: 0;
+  height: 41px;
+  border-radius: 10px;
+  background: #fff;
+  color: #285581;
+  box-shadow: 0 5px 12px #164d7d1a;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .04em;
+}
+.services-section .automation-preview__node--ai {
+  flex-basis: 49px;
+  background: #145bdf;
+  color: #fff;
+  animation: digitera-spark-pulse 3s ease-in-out infinite;
+}
+.services-section .automation-preview__line {
+  position: relative;
+  flex: 1 1 15px;
+  min-width: 8px;
+  max-width: 28px;
+  height: 2px;
+  background: #80addb;
+}
+.services-section .automation-preview__line::after {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #2187d9;
+  animation: digitera-data-flow 2.4s ease-in-out infinite;
+}
+.services-section .service-subcategory {
+  margin-top: 18px;
+  padding: 14px;
+  border: 1px solid #cfdef2;
+  border-radius: 12px;
+  background: #fff;
+}
+.services-section .service-subcategory h4 {
+  margin: 0 0 6px;
+  color: #123c79;
+  font-size: 15px;
+  line-height: 1.35;
+}
+.services-section .service-subcategory p {
+  margin: 0 0 10px;
+  font-size: 12px;
+}
+.services-section .service-subcategory .chips {
+  margin-top: 8px;
+}
+@keyframes digitera-ring-spin {
+  from { transform: rotate(18deg); }
+  to { transform: rotate(378deg); }
+}
+@keyframes digitera-spark-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.13); opacity: .8; }
+}
+@keyframes digitera-data-flow {
+  0% { transform: translateX(0); opacity: 0; }
+  20% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { transform: translateX(22px); opacity: 0; }
+}
+@media (max-width: 600px) {
+  .services-section .service-preview { height: 95px; }
+  .services-section .automation-preview__node { font-size: 9px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .services-section .motion-preview__ring,
+  .services-section .motion-preview__star,
+  .services-section .automation-preview__node--ai,
+  .services-section .automation-preview__line::after {
+    animation: none !important;
+  }
+  .services-section .service-list details,
+  .services-section .service-list details:hover {
+    transition: none !important;
+    transform: none !important;
+  }
+}
